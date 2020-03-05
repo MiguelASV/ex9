@@ -46,9 +46,13 @@ get_header();
         while ( $query2->have_posts() ) {
             $query2->the_post();
             echo '<div class="contenu-conference">';
-            echo '<li>' . get_the_title( $query2->post->ID ) . ' - '. get_the_date() . '</li>';
-            echo '<p>' . get_the_excerpt() .'<p>';
-            echo get_the_post_thumbnail(null, "thumbnail");
+                echo '<div class="texte-conference">';
+                    echo '<li>' . get_the_title( $query2->post->ID ) . ' - '. get_the_date() . '</li>';
+                    echo '<p>' . get_the_excerpt() .'<p>';
+                echo '</div>';
+                echo '<div>';
+                    echo get_the_post_thumbnail(null, "thumbnail");
+                echo '</div>';
             echo '</div>';
         }
         
@@ -57,9 +61,8 @@ get_header();
         wp_reset_postdata();
 
             // The Query
-            echo '<div class="section-nouvelles">';
-
             echo '<h2>Voici les dernières nouvelles</h2>';
+            echo '<div class="section-nouvelles">';
             $args = array(
                         "category_name" => "nouvelle",
                         "posts_per_page" => 3,
@@ -71,9 +74,10 @@ get_header();
             // The Loop
             while ( $query1->have_posts() ) {
                 $query1->the_post();
-                
-                echo '<h4>' . get_the_title() . '</h4>';
-                echo get_the_post_thumbnail(null, "thumbnail");
+                echo '<div class="contenu-nouvelles">';
+                    echo '<h4>' . get_the_title() . '</h4>';
+                    echo get_the_post_thumbnail(null, "thumbnail");
+                echo '</div>';
             }
             echo '</div>';
             

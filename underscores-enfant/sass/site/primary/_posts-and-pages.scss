@@ -26,6 +26,24 @@
 	display: none;
 }
 
-.nouvelles img {
-	float: left;
+.contenu-conference {
+	display: flex;
+	flex-direction: row-reverse;
+	
+	
+	img {
+		width: 200px;
+		height: 200px;
+		min-width: 200px;
+		min-height: 200px;
+	}
+	.texte-conference {
+		margin-left: 3%;
+	}
 }
+
+.section-nouvelles {
+	display: flex;
+	justify-content: space-around;
+}
+
