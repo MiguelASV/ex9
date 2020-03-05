@@ -29,8 +29,37 @@ get_header();
 
 		endwhile; // End of the loop.
         //term_description( $category );
- 
+
+        echo '<div class="section-conference">';
+
+        echo '<h2>Nos dernières conférences</h2>';
+        /* The 2nd Query (without global var) */
+        $args2 = array (
+            "category_name" => "conference"
+        );
+
+        $query2 = new WP_Query( $args2 );
+        $catID = get_the_category($query2->post->ID);
+
+        echo "<h1>".category_description($catID[0])."</h1>";
+        // The 2nd Loop
+        while ( $query2->have_posts() ) {
+            $query2->the_post();
+            echo '<div class="contenu-conference">';
+            echo '<li>' . get_the_title( $query2->post->ID ) . ' - '. get_the_date() . '</li>';
+            echo '<p>' . get_the_excerpt() .'<p>';
+            echo get_the_post_thumbnail(null, "thumbnail");
+            echo '</div>';
+        }
+        
+        echo '</div>';
+        // Restore original Post Data
+        wp_reset_postdata();
+
             // The Query
+            echo '<div class="section-nouvelles">';
+
+            echo '<h2>Voici les dernières nouvelles</h2>';
             $args = array(
                         "category_name" => "nouvelle",
                         "posts_per_page" => 3,
@@ -42,9 +71,11 @@ get_header();
             // The Loop
             while ( $query1->have_posts() ) {
                 $query1->the_post();
+                
                 echo '<h4>' . get_the_title() . '</h4>';
-                echo '<p>'. get_the_excerpt(). '</p>';
+                echo get_the_post_thumbnail(null, "thumbnail");
             }
+            echo '</div>';
             
             /* Restore original Post Data 
             * NB: Because we are using new WP_Query we aren't stomping on the 
@@ -55,24 +86,6 @@ get_header();
             wp_reset_postdata();
             
             
-            /* The 2nd Query (without global var) */
-            $args2 = array (
-                "category_name" => "evenement"
-            );
-
-            $query2 = new WP_Query( $args2 );
-            $catID = get_the_category($query2->post->ID);
-
-            echo "<h1>".category_description($catID[0])."</h1>";
-            // The 2nd Loop
-            while ( $query2->have_posts() ) {
-                $query2->the_post();
-                echo '<li>' . get_the_title( $query2->post->ID ) . '</li>';
-                echo get_the_post_thumbnail(null, "thumbnail");
-            }
-            
-            // Restore original Post Data
-            wp_reset_postdata();
             
             ?>
 		</main><!-- #main -->
