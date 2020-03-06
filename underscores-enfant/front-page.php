@@ -65,7 +65,7 @@ get_header();
             echo '<div class="section-nouvelles">';
             $args = array(
                         "category_name" => "nouvelle",
-                        "posts_per_page" => 3,
+                        "posts_per_page" => 5,
                         'orderby' => 'date',
                         'order' => 'DESC'
             );
@@ -75,7 +75,7 @@ get_header();
             while ( $query1->have_posts() ) {
                 $query1->the_post();
                 echo '<div class="contenu-nouvelles">';
-                    echo '<h4>' . get_the_title() . '</h4>';
+                    echo '<h4>' . substr(get_the_title(),1,15) . '</h4>';
                     echo get_the_post_thumbnail(null, "thumbnail");
                 echo '</div>';
             }
