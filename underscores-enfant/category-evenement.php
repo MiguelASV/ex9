@@ -1,6 +1,9 @@
+<?php
+get_header();
+?>
 <div id="primary" class="content-area">
     <h2>Nos événements importants cette année</h2>
-    <main id="main" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(31, 1fr);">
+    <main id="main" class="grille">
     <?php
     
     while ( have_posts() ):
